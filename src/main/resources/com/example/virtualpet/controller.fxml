@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<StackPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.virtualpet.Controller" prefWidth="600" prefHeight="400">
+
+   <!-- Selection screen -->
+   <AnchorPane fx:id="selectionPane" prefHeight="400" prefWidth="600">
+      <children>
+         <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="/background.jpg" />
+            </image>
+         </ImageView>
+
+         <HBox alignment="CENTER" blendMode="OVERLAY" layoutX="200.0" layoutY="261.0" prefHeight="100.0" prefWidth="200.0">
+            <children>
+               <ChoiceBox fx:id="animalChoiceBox" prefWidth="150.0">
+                  <effect>
+                     <DropShadow />
+                  </effect>
+               </ChoiceBox>
+            </children>
+         </HBox>
+
+         <Label fx:id="selectionLabel" alignment="CENTER" layoutX="74.0" layoutY="59.0" prefHeight="18.0" prefWidth="452.0" text="CHOOSE YOUR ANIMAL" textFill="#990000">
+            <font>
+               <Font size="25.0" />
+            </font>
+         </Label>
+
+         <ImageView fx:id="selectedAnimalImageView" fitHeight="83.0" fitWidth="200.0" layoutX="200.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true" />
+
+         <Button fx:id="startButton" layoutX="512.0" layoutY="361.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="88.0" text="PLAY" onAction="#handleStartButton">
+            <effect>
+               <Lighting>
+                  <bumpInput>
+                     <Shadow />
+                  </bumpInput>
+                  <light>
+                     <Light.Distant />
+                  </light>
+               </Lighting>
+            </effect>
+         </Button>
+      </children>
+   </AnchorPane>
+
+   <!-- Game screen (initially hidden) -->
+   <AnchorPane fx:id="gamePane" visible="false" managed="false" prefHeight="400" prefWidth="600">
+      <children>
+         <!-- Main game pane -->
+         <AnchorPane fx:id="rootPane" prefHeight="400" prefWidth="600">
+            <children>
+               <ImageView fx:id="backgroundImageView" fitHeight="400" fitWidth="600" pickOnBounds="true" preserveRatio="true" />
+
+               <!-- Animal Image -->
+               <!-- Set initial layoutY to 300, meaning on “ground” but above bars -->
+               <ImageView fx:id="petImageView" fitHeight="100" fitWidth="100" layoutX="20" layoutY="300" pickOnBounds="true" preserveRatio="true" />
+
+               <!-- Buttons for actions -->
+               <Button fx:id="feedButton" layoutX="380" layoutY="350" text="Feed" />
+               <Button fx:id="sleepButton" layoutX="450" layoutY="350" text="Sleep" />
+               <Button fx:id="playButton" layoutX="520" layoutY="350" text="Play" />
+
+               <!-- Progress Bars -->
+               <!-- Positioned at the top so animal cannot overlap (MIN_Y ~120 in code) -->
+               <ProgressBar fx:id="hungerProgressBar" layoutX="20" layoutY="50" prefWidth="150" progress="1.0" />
+               <Label layoutX="20" layoutY="80" text="Hunger" />
+
+               <ProgressBar fx:id="sleepProgressBar" layoutX="200" layoutY="50" prefWidth="150" progress="1.0" />
+               <Label layoutX="200" layoutY="80" text="Sleep" />
+
+               <ProgressBar fx:id="energyProgressBar" layoutX="380" layoutY="50" prefWidth="150" progress="1.0" />
+               <Label layoutX="380" layoutY="80" text="Energy" />
+
+               <Label fx:id="statusLabel" layoutX="20" layoutY="20" prefWidth="560" />
+            </children>
+         </AnchorPane>
+      </children>
+   </AnchorPane>
+
+</StackPane>
